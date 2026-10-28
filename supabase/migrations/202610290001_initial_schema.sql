@@ -17,3 +17,7 @@ insert into public.titles(id,title,description,genre,release_year,rating,poster_
 ('redline','Redline Protocol','A burned intelligence analyst discovers a signal that could rewrite the balance of power.','Thriller',2025,'16+','https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=900&q=85','https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=1800&q=85',true),
 ('ocean-below','The Ocean Below','A deep-sea research crew finds an impossible structure beneath the Arctic shelf.','Sci-Fi',2024,'13+','https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=900&q=85','https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=1800&q=85',false),
 ('last-signal','The Last Signal','A radio astronomer receives a message that appears to be coming from tomorrow.','Mystery',2025,'13+','https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=900&q=85','https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=1800&q=85',false) on conflict(id) do nothing;
+
+-- Explicit grants complement the row-level security policies above.
+grant select on public.titles to anon, authenticated;
+grant select, insert, delete on public.watchlist to authenticated;
