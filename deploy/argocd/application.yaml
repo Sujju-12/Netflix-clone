@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: netflix-clone
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/Sujju-12/Netflix-clone.git
+    targetRevision: main
+    path: deploy/helm/netflix-clone
+    helm:
+      valueFiles:
+        - values.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: netflix
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
